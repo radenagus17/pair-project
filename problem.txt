@@ -1,0 +1,20 @@
+- bagaimana idea app nya ?
+- appnya mau dibuat seperti apa ?
+- kelebihannya dari app tersebut apa ?
+- feature apa yang diunggulkan dari app nya  ?
+- bagaimana struktur ERD nya ?
+
+
+answer:
+- idenya adalah membuat aplikasi yang dapat mendeteksi gejala awal dari beberapa penyakit yang tersedia nanti, hampir mirip halodoc namun disini belum kita buat untuk konsultasi ke appsnya melalui prediksi awal dari database yang tersedia
+- hampir mirip halodoc, hanya disini fiturnya mendeteksi gejala awal penyakit
+- kelebihannya adalah memberikan edukasi/informasi tentang penanganan/solve dari beberapa penyakit ringan
+- featurnya memberikan free app dan user friendly
+- Symtomps hasMany Diseases
+
+
+day 1:
+- setup database
+- setup login & register
+- setup relasi
+- setup landing page
