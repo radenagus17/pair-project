@@ -14,7 +14,22 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   User.init({
-    uname: DataTypes.STRING,
+    uname: {
+      type:DataTypes.STRING,
+      validate:{
+        isUniqueUname: function(newUnmae){
+          return User.findOne({
+            where : {
+              uname: newUnmae
+            }
+          }).then(function(user){ // object user kalau ada || Null kalo gada
+            if(user){
+              throw ('Úname sudah dipakai')
+            }
+          })
+        }
+      }
+    },
     upass: DataTypes.STRING
   }, {
     sequelize,
