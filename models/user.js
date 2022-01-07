@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -11,29 +9,34 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      User.hasMany(models.MedicalRecord, { foreignKey: "UserId" });
     }
-  };
-  User.init({
-    uname: {
-      type:DataTypes.STRING,
-      validate:{
-        isUniqueUname: function(newUnmae){
-          return User.findOne({
-            where : {
-              uname: newUnmae
-            }
-          }).then(function(user){ // object user kalau ada || Null kalo gada
-            if(user){
-              throw ('Úname sudah dipakai')
-            }
-          })
-        }
-      }
+  }
+  User.init(
+    {
+      uname: {
+        type: DataTypes.STRING,
+        validate: {
+          isUniqueUname: function (newUnmae) {
+            return User.findOne({
+              where: {
+                uname: newUnmae,
+              },
+            }).then(function (user) {
+              // object user kalau ada || Null kalo gada
+              if (user) {
+                throw "Úname sudah dipakai";
+              }
+            });
+          },
+        },
+      },
+      upass: DataTypes.STRING,
     },
-    upass: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'User',
-  });
+    {
+      sequelize,
+      modelName: "User",
+    }
+  );
   return User;
 };

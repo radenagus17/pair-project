@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Go-Checkup</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <%- include('partials/navbar') %>
+    <div class="wrapper">
+      <h1 class="header">GO-CHECKUP</h1>
+      <p class="headerText">Thank you for Being with me</p>
+      <form method="post" action="/checkUp">
+        <div class="inputWrapper">
+          <select class="custom-select" name="gejala1">
+            <option selected disabled>Gejala 1</option>
+            <% symtomps.forEach((symtomp) => { %>
+            <option value="<%= symtomp.Disease.id %>"><%= symtomp.name %></option>
+            <% }) %>
+          </select>
+        </div>
+        <div class="inputWrapper">
+          <select class="custom-select" name="gejala2">
+            <option selected disabled>Gejala 2</option>
+            <% symtomps.forEach((symtomp) => { %>
+            <option value="<%= symtomp.Disease.id %>"><%= symtomp.name %></option>
+            <% }) %>
+          </select>
+        </div>
+
+        <div class="inputWrapper">
+          <select class="custom-select" name="gejala3">
+            <option selected disabled>Gejala 3</option>
+            <% symtomps.forEach((symtomp) => { %>
+            <option value="<%= symtomp.Disease.id %>"><%= symtomp.name %></option>
+            <% }) %>
+          </select>
+        </div>
+
+        <button type="submit" class="submitButton">Check</button>
+      </form>
+    </div>
+  </body>
+</html>
