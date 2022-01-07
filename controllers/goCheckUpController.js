@@ -1,4 +1,4 @@
-const { Symtomp, Disease, MedicalRecord } = require("../models");
+const { User,Symtomp, Disease, MedicalRecord } = require("../models");
 
 class GoCheckUpController {
   static getAllSymtomps(req, res) {
@@ -40,12 +40,36 @@ class GoCheckUpController {
   }
 
   static medicalRecords(req, res) {
-    MedicalRecord.findAll()
-      .then((result) => {
-        console.log(result);
-        res.render("medical_records", { records: result });
-      })
-      .catch((err) => res.send(err.message));
+    User.findOne({
+      where: { id: req.session.UserId },
+      include: [Disease,MedicalRecord]
+    })
+    .then(records => {
+      
+      console.log(records.Diseases);
+      res.render('medical_records',{records})
+    })
+    .catch(err =>{
+      res.send(err.message)
+    })
+    // MedicalRecord.findAll()
+    //   .then((result) => {
+    //     console.log(result);
+    //     res.render("medical_records", { records: result });
+    //   })
+    //   .catch((err) => res.send(err.message));
+  }
+
+  static postResult(req, res){
+    console.log(req.session)
+    MedicalRecord.create({UserId :req.session.UserId, DiseaseId:req.body.DiseaseId,date: new Date()})
+    .then((result) => {
+      console.log(result);
+      res.redirect("/medicalRecords");
+    })
+    .catch(err =>{
+      res.send(err)
+    })
   }
 }
 

@@ -46,14 +46,19 @@ class Controller {
           console.log(data);
           bcrypt.compare(req.body.upass, data.upass).then((result) => {
             // Baca dari dokumentasi, hasil nya adalah result true or false
-            if (result === true) {
-              req.session.isLoggedIn = true;
-              req.session.username = data.uname;
-
-              res.redirect("/");
-            } else {
-              res.redirect("/login?err=true");
-            }
+            User.findOne({where:{uname:data.uname}})
+            .then((dataUser)=>{
+              if (result === true) {
+                req.session.isLoggedIn = true;
+                req.session.username = data.uname;
+                req.session.UserId = dataUser.id
+  
+                res.redirect("/");
+              } else {
+                res.redirect("/login?err=true");
+              }
+            })
+            
           });
         }
       })
@@ -85,10 +90,16 @@ class Controller {
     body.upass = await bcrypt.hash(body.upass, salt);
     User.create(body)
       .then((data) => {
-        console.log(data);
-        req.session.isLoggedIn = true;
-        req.session.username = body.uname;
-        res.redirect("/");
+        User.findOne({where:{uname:data.uname}})
+        .then((userData) => {
+          req.session.isLoggedIn = true;
+          req.session.username = body.uname;
+          req.session.UserId = userData.id
+          res.redirect("/");
+        })
+        .catch(err => {
+          res.send(err)
+        })
       })
       .catch((err) => {
         res.redirect(`login?err='${err.errors[0].message}'`);

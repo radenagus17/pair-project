@@ -13,19 +13,25 @@
       <table class="table table-striped" style="color: #43a8ff; background: #fff; box-shadow: 0 35px 68px 0 rgba(136, 174, 222, 0.42), inset 0 -8px 16px 0 #b9d1f1">
         <thead>
           <tr>
-            <th scope="col">No</th>
-            <th scope="col">Diagnosa Penyakit</th>
+            <th scope="col">Name</th>
             <th scope="col">Description</th>
             <th scope="col">Level</th>
+            <th scope="col">Nama Dokter</th>
+            <th scope="col">No HP</th>
+            <th scope="col">Alamat</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <th scope="row">1</th>
-            <td>Diagnosa</td>
-            <td>Description</td>
-            <td>Level</td>
-          </tr>
+          <% records.Diseases.forEach(el =>{%>
+            <td><%= el.name%></td>
+            <td><%= el.description%></td>
+            <td><%= el.level%></td>
+            <td>Agus </td>
+            <td>0341234567890 </td>
+            <td>Jalan yang benar no. 1 </td>
+          <%})%>
+        </tr>
         </tbody>
       </table>
     </div>
