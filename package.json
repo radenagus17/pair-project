@@ -2,8 +2,10 @@
   "name": "pair-project",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "functions/server.js",
   "scripts": {
+    "start": "nodemon server-local.js",
+    "build": "netlify-lambda build express",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -27,7 +29,9 @@
     "sequelize": "^6.12.5"
   },
   "devDependencies": {
+    "netlify-lambda": "^2.0.15",
     "nodemon": "^2.0.15",
-    "sequelize-cli": "^6.3.0"
+    "sequelize-cli": "^6.3.0",
+    "serverless-http": "^3.0.1"
   }
 }
